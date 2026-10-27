@@ -2,11 +2,8 @@
 #!/usr/bin/env bash
 
 # Google Pixel repositories
-# Branch: lineage-24.0
 # Device trees and common tree: shuskydump
 # Vendor blobs: shuskydump
-
-BRANCH="lineage-24.0"
 
 clone_repo() {
     local org="$1"
@@ -16,7 +13,6 @@ clone_repo() {
     echo "========================================"
     echo "Repository: $org/$repo"
     echo "Target:     $path"
-    echo "Branch:     $BRANCH"
     echo "========================================"
 
     if [ -d "$path/.git" ]; then
@@ -33,11 +29,11 @@ clone_repo() {
 
     mkdir -p "$(dirname "$path")"
 
-    if git clone --depth=1 -b "$BRANCH" \
+    if git clone --depth=1 \
         "https://github.com/$org/$repo.git" "$path"; then
         echo "SUCCESS: $path"
     else
-        echo "FAILED: $org/$repo (branch: $BRANCH)"
+        echo "FAILED: $org/$repo"
     fi
 
     echo
